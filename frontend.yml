@@ -1,0 +1,30 @@
+- name: Setup Nginx Server and configuration.
+  hosts: all
+  tasks:
+    - name: Installing Nginx Server
+      ansible.builtin.yum:
+        name: nginx
+        state: present
+
+    - name: Remove Old App Files
+      ansible.builtin.file:
+        path: /usr/share/nginx/html
+        state: absent
+
+    - name: Unarchive Frontend App Code
+      ansible.builtin.archive:
+        src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+        dest: /usr/share/nginx/html
+        remote_src: yes
+
+    - name: Copy Nginx Reverse Proxy
+      ansible.builtin.copy:
+        src: roboshop.conf
+        dest: /etc/nginx/default.d
+
+    - name: Enable and restart the Nginx Service
+      ansible.builtin.systemd:
+        name: nginx
+        state: restarted
+
+
