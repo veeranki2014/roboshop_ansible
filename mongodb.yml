@@ -1,5 +1,6 @@
 - name: Mongodb Setup
   hosts: all
+  become: true
   tasks:
     - name: Setup Mongodb Setup
       ansible.builtin.copy:
