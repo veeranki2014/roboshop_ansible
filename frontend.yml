@@ -9,13 +9,13 @@
 
     - name: Remove Old App Files
       ansible.builtin.file:
-        path: /usr/share/nginx/html
+        path: /usr/share/nginx/html/
         state: absent
 
     - name: Unarchive Frontend App Code
       ansible.builtin.archive:
         src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
-        dest: /usr/share/nginx/html
+        dest: /usr/share/nginx/html/
         remote_src: yes
 
     - name: Copy Nginx Reverse Proxy
