@@ -1,7 +1,4 @@
-- name: Setup Nginx Server and configuration.
-  hosts: all
-  become: true
-  tasks:
+
     - name: Installing Nginx Server
       ansible.builtin.yum:
         name: nginx
