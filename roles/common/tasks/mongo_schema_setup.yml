@@ -1,0 +1,31 @@
+#echo -e "\e[33m  Create SystemD catalogue Service \e[0m"
+#cp /home/centos/roboshop_shell/mongodb.repo /etc/yum.repos.d/mongod.repo &>>/tmp/roboshop.log
+#
+#stat_check $?
+#
+#echo -e "\e[33m  Create SystemD catalogue Service \e[0m"
+#yum install mongodb-org-shell -y &>>/tmp/roboshop.log &>>/tmp/roboshop.log
+#
+#stat_check $?
+#
+#echo -e "\e[33m  Create SystemD catalogue Service \e[0m"
+#mongo --host mongodb-dev.veerankitek.com </app/schema/user.js &>>/tmp/roboshop.log
+#
+#stat_check $?
+
+- name: Load Mongodb Schema
+  ansible.builtin.copy:
+    src: mongodb.repo
+    dest: /etc/yum.repos.d/mongod.repo
+  remote_src: yes
+
+- name: Install Mongodb Service
+  ansible.builtin.yum:
+    name: mongodb-org-shell
+    state: present
+
+- name: Create SystemD Service
+  ansible.builtin.shell: mongo --host mongodb-dev.veerankitek.com </app/schema/{{ component }}.js
+
+
+
