@@ -26,5 +26,5 @@
 
 - name: Install Redis Repo
   ansible.builtin.dnf:
-    name: yum install redis
+    name: redis
     state: installed
