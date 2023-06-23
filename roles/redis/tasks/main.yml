@@ -44,6 +44,6 @@
 - name: Enable & Restart Services
   ansible.builtin.systemd:
     name: redis
-    state: restart
+    state: restarted
     enabled: yes
 
