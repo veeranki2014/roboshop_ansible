@@ -17,7 +17,6 @@
   ansible.builtin.copy:
     src: mongodb.repo
     dest: /etc/yum.repos.d/mongod.repo
-  remote_src: yes
 
 - name: Install Mongodb Service
   ansible.builtin.yum:
