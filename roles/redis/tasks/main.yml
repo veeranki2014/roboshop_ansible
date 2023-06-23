@@ -28,3 +28,22 @@
   ansible.builtin.dnf:
     name: redis
     state: installed
+
+- name: update Redis Listen Address - /etc/redis.conf
+  ansible.builtin.replace:
+    path: /etc/redis.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: update Redis Listen Address - /etc/redis/redis.conf
+  ansible.builtin.replace:
+    path: /etc/redis/redis.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Enable & Restart Services
+  ansible.builtin.systemd:
+    name: redis
+    state: restart
+    enabled: yes
+
