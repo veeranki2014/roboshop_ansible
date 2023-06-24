@@ -1,0 +1,14 @@
+- name: Load MySQL Schema
+  ansible.builtin.copy:
+    src: mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
+
+- name: Install MySQL Service
+  ansible.builtin.yum:
+    name: mysql
+    state: present
+
+- name: Load Mysql Schema
+  ansible.builtin.shell: mysql -h mysql-dev.veerankitek.com -uroot -pRoboShop@1 </app/schema/{{ component }}.sql
+
+

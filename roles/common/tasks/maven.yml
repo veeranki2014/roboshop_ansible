@@ -1,36 +1,24 @@
-#echo -e "${colour}  Install Maven ${nocolour}"
-#yum install maven -y  &>>${log_file}
-#
-#stat_check $?
-#
-#app_presetup
-#
-#echo -e "${colour} Build the code and target  ${nocolour}"
-#cd ${app_path}
-#mvn clean package &>>${log_file}
-#mv target/${component}-1.0.jar ${component}.jar &>>${log_file}
-#
-#stat_check $?
-#
-#echo -e "${colour} Copy ${component} service  ${nocolour}"
-#  ##copy ${component} service
-#cp /home/centos/roboshop_shell/${component}.service /etc/systemd/system/${component}.service
-#
-#stat_check $?
-#
-#echo -e "${colour} Install MYSQL  ${nocolour}"
-#yum install mysql -y  &>>${log_file}
-#
-#stat_check $?
-#
-#echo -e "${colour}  Load Mysql schema ${nocolour}"
-#mysql -h mysql-dev.veerankitek.com -uroot -pRoboShop@1 < ${app_path}/schema/${component}.sql  &>>${log_file}
-#
-#stat_check $?
-#
-#echo -e "${colour} Restart ${component} services again  ${nocolour}"
-#systemctl daemon-reload &>>${log_file}
-#systemctl enable ${component} &>>${log_file}
-#systemctl restart ${component}  &>>${log_file}
-#
-#stat_check $?
+- name: Install Maven
+  ansible.builtin.yum:
+    name: maven
+    state: installed
+
+- name: Import YAML File
+  ansible.builtin.import_tasks:
+    file: app_presetup.yml
+
+- name: Download Maven Dependencies
+  ansible.builtin.shell: mvn clean package ; mv target/{{ component }}-1.0.jar {{ component }}.jar
+  args:
+      chdir: /app
+
+- name: Load Schema File
+  ansible.builtin.import_tasks:
+    file: mysql_schema_setup.yml
+
+  #systemd_setup
+- name: SystemD setup
+  ansible.builtin.import_tasks:
+    file: systemd_setup.yml
+
+
