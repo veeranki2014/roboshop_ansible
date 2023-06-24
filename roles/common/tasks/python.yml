@@ -21,7 +21,7 @@
       - python3-devel
 
 - name: Import task
-  ansible.builtin.import_task:
+  ansible.builtin.import_tasks:
     file: app_presetup.yml
 
 - name: Install Python Dependencies
@@ -30,7 +30,7 @@
     chdir: /app
 
 - name: Load SystemD setup
-  ansible.builtin.import_task:
+  ansible.builtin.import_tasks:
     file: systemd_setup.yml
 
 
