@@ -1,8 +1,3 @@
-#source common.sh
-#component=shipping
-#
-#maven
-
 - name: Load Module(Import)
   ansible.builtin.import_role:
     name: common
