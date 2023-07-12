@@ -19,20 +19,3 @@
     remote_src: yes
 
 
-
-
-
-
-
-
-#    echo -e "${colour} Download App Code ${nocolour}"
-#    curl -o /tmp/$catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/$catalogue.zip &>>${log_file}
-#
-#    stat_check $?
-#
-#    echo -e "${colour} Extract the App Code ${nocolour}"
-#    cd ${app_path}
-#    unzip /tmp/${component}.zip &>>${log_file}
-#
-#    stat_check $?
-
