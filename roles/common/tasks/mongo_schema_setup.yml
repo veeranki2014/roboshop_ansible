@@ -1,7 +1,7 @@
 - name: Load Mongodb Schema
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: mongodb.repo
-    dest: /etc/yum.repos.d/mongod.repo
+    dest: /etc/yum.repos.d/mongodb.repo
 
 - name: Install Mongodb Service
   ansible.builtin.yum:

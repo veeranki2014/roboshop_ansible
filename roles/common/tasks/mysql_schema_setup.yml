@@ -1,5 +1,5 @@
 - name: Load MySQL Schema
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: mysql.repo
     dest: /etc/yum.repos.d/mysql.repo
 
