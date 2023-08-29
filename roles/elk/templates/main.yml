@@ -3,6 +3,8 @@
     port => 5044
     }
   }
+  
+  ###Fileters
     
     output {
     elasticsearch {
