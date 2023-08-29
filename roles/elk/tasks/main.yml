@@ -1,0 +1,11 @@
+- name: CopyLogStash config
+  ansible.builtin.copy:
+    src: logstash.conf
+    dest: /etc/logstash/conf.d/logstash.conf
+
+- name: Logstash Restart
+  ansible.builtin.systemd:
+    name: logstash
+    state: restarted
+
+
